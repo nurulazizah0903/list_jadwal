@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
           selectedItemColor: Color(0xFFFFD369),
           unselectedItemColor: Color(0xFFEEEEEE),
         ),
+        primaryColor: const Color.fromARGB(255, 253, 198, 69),
       ),
     );
   }

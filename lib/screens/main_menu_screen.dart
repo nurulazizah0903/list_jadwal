@@ -28,11 +28,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("Jadwalku"),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-      ),
       body: _screens[_selectedNavbar],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor:
@@ -54,6 +49,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
             Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         showUnselectedLabels: true,
         onTap: _changeSelectedNavBar,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+        child: const Icon(
+          Icons.add,
+        ),
       ),
     );
   }
