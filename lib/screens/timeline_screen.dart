@@ -1,79 +1,203 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:timelines/timelines.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../widgets/all_timeline_widget.dart';
+import '../widgets/text_form_field_widget.dart';
 
 class TimelineScreen extends StatelessWidget {
   const TimelineScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController taskNameController = TextEditingController();
+    TextEditingController taskDescriptionController = TextEditingController();
+
+    DateTime startTime = DateTime.now();
+    DateTime endTime = DateTime.now();
+
+    DateFormat dateFormat = DateFormat("HH:MM");
+
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Timeline"),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Timeline.tileBuilder(
-            theme: TimelineTheme.of(context).copyWith(
-              nodePosition: 0,
-              connectorTheme: TimelineTheme.of(context).connectorTheme.copyWith(
-                    thickness: 2.5,
-                    color: Theme.of(context)
-                        .bottomNavigationBarTheme
-                        .selectedItemColor,
-                  ),
-              indicatorTheme: TimelineTheme.of(context).indicatorTheme.copyWith(
-                    size: 25.0,
-                    position: 0.5,
-                    color: Theme.of(context)
-                        .bottomNavigationBarTheme
-                        .selectedItemColor,
-                  ),
-            ),
-            builder: TimelineTileBuilder.fromStyle(
-              contentsAlign: ContentsAlign.basic,
-              contentsBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 15.0, horizontal: 10.0),
-                  child: ListTile(
-                    title: Text(
-                      "Task ke $index",
-                      style: TextStyle(
-                        color: Theme.of(context)
-                            .bottomNavigationBarTheme
-                            .unselectedItemColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+      appBar: AppBar(
+        title: const Text("Timeline"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      ),
+      body: AllTimelineWidget(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return StatefulBuilder(
+                    builder: (BuildContext context, setState) {
+                  return AlertDialog(
+                    title: const Text(
+                      "Tambah Kegiatan",
+                      textAlign: TextAlign.center,
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .bottomNavigationBarTheme
-                              .unselectedItemColor,
+                    content: SizedBox(
+                      height: 250.0,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            TextFormFieldWidget(
+                              controller: taskNameController,
+                              hint: "Masukan nama kegiatan",
+                              label: "Nama Kegiatan",
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            TextFormFieldWidget(
+                              controller: taskDescriptionController,
+                              hint: "Masukan deskripsi kegiatan",
+                              label: "Deskripsi Kegiatan",
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 200.0,
+                                                  child: CupertinoDatePicker(
+                                                      initialDateTime:
+                                                          DateTime.now(),
+                                                      onDateTimeChanged: (val) {
+                                                        setState(() {
+                                                          startTime = val;
+                                                        });
+                                                      }),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                CupertinoButton(
+                                                    child: const Text("OK"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    })
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.grey.shade400,
+                                    backgroundColor: Colors.grey.shade200,
+                                  ),
+                                  child: Text(
+                                    "Waktu Mulai",
+                                    style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+                                ),
+                                Text(dateFormat.format(startTime)),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 200.0,
+                                                  child: CupertinoDatePicker(
+                                                      initialDateTime:
+                                                          DateTime.now(),
+                                                      onDateTimeChanged: (val) {
+                                                        setState(() {
+                                                          endTime = val;
+                                                        });
+                                                      }),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                CupertinoButton(
+                                                    child: const Text("OK"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    })
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.grey.shade400,
+                                    backgroundColor: Colors.grey.shade200,
+                                  ),
+                                  child: Text(
+                                    "Waktu Akhir",
+                                    style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+                                ),
+                                Text(dateFormat.format(endTime)),
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.toggle_on,
-                        color: Theme.of(context)
-                            .bottomNavigationBarTheme
-                            .unselectedItemColor,
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "Batalkan",
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              },
-              itemCount: 10,
-              indicatorStyle: IndicatorStyle.outlined,
-            ),
-          ),
-        ));
+                      TextButton(
+                        onPressed: () {
+                          // Navigator.of(context).pop();
+
+                          print(taskNameController.text);
+                          print(taskDescriptionController.text);
+                          print(startTime);
+                          print(endTime);
+                        },
+                        child: const Text(
+                          "OK",
+                        ),
+                      )
+                    ],
+                  );
+                });
+              });
+        },
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
+    );
   }
 }

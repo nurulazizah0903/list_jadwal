@@ -50,14 +50,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         showUnselectedLabels: true,
         onTap: _changeSelectedNavBar,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor:
-            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-        child: const Icon(
-          Icons.add,
-        ),
-      ),
     );
   }
 }
