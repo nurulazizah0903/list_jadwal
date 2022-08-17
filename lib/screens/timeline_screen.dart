@@ -1,8 +1,13 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:jadwalku/models/task_model.dart';
+import 'package:jadwalku/providers/timeline_provider.dart';
+import 'package:jadwalku/widgets/all_timeline_widget.dart';
+import 'package:provider/provider.dart';
 
-import '../widgets/all_timeline_widget.dart';
+import '../widgets/single_timeline.dart';
+// import '../widgets/all_timeline_widget.dart';
 import '../widgets/text_form_field_widget.dart';
 
 class TimelineScreen extends StatelessWidget {
@@ -24,7 +29,8 @@ class TimelineScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
-      body: AllTimelineWidget(),
+      body: const SingleTimeline(),
+      // body: const AllTimelineWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
@@ -176,12 +182,19 @@ class TimelineScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigator.of(context).pop();
+                          TaskModel task = TaskModel(
+                            id: DateTime.now().toString(),
+                            title: taskNameController.text,
+                            description: taskDescriptionController.text,
+                            startTime: startTime,
+                            endTime: endTime,
+                            isComplete: false,
+                          );
 
-                          print(taskNameController.text);
-                          print(taskDescriptionController.text);
-                          print(startTime);
-                          print(endTime);
+                          Provider.of<TimelineProvider>(context, listen: false)
+                              .addNewTimeline(task);
+
+                          Navigator.of(context).pop();
                         },
                         child: const Text(
                           "OK",
