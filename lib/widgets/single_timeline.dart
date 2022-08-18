@@ -19,7 +19,7 @@ class SingleTimeline extends StatelessWidget {
       ),
       child: Consumer<TimelineProvider>(
           builder: (BuildContext context, value, child) {
-        DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+        DateFormat dateFormat = DateFormat("yyyy-MM-dd");
         String dateTime = dateFormat.format(DateTime.now());
 
         DateFormat dateFormatTask = DateFormat("HH:MM");
@@ -33,12 +33,12 @@ class SingleTimeline extends StatelessWidget {
                 nodePosition: 0,
                 connectorTheme:
                     TimelineTheme.of(context).connectorTheme.copyWith(
-                          thickness: 2.5,
+                          thickness: 2.0,
                           color: Theme.of(context).primaryColor,
                         ),
                 indicatorTheme:
                     TimelineTheme.of(context).indicatorTheme.copyWith(
-                          size: 25.0,
+                          size: 20.0,
                           position: 0.5,
                           color: Theme.of(context).primaryColor,
                         ),

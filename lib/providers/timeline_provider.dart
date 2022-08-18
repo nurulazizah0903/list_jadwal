@@ -26,7 +26,7 @@ class TimelineProvider with ChangeNotifier {
   // Menambah sebuah timeline baru
 
   void addNewTimeline(TaskModel task) {
-    DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     String dateTime = dateFormat.format(DateTime.now());
 
     if (!_timelines.containsKey(dateTime)) {

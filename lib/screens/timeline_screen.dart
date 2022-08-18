@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 
 import '../models/task_model.dart';
 import '../widgets/single_timeline.dart';
+import '../enum/selected_timeline_enum.dart';
 import '../providers/timeline_provider.dart';
+import '../widgets/all_timeline_widget.dart';
 import '../widgets/cupertino_theme_widget.dart';
-// import '../widgets/all_timeline_widget.dart';
 import '../widgets/text_form_field_widget.dart';
+import '../providers/selected_timeline_provider.dart';
 
 class TimelineScreen extends StatelessWidget {
   const TimelineScreen({Key? key}) : super(key: key);
@@ -18,22 +20,47 @@ class TimelineScreen extends StatelessWidget {
     TextEditingController taskNameController = TextEditingController();
     TextEditingController taskDescriptionController = TextEditingController();
 
-    // DateTime startTime = DateTime.now();
-    // DateTime endTime = DateTime.now();
-
     String startTime = "";
     String endTime = "";
 
     DateFormat dateFormat = DateFormat("HH:MM");
 
+    Widget getSelectedWidget(SelectedTimelineEnum timeline) {
+      switch (timeline) {
+        case SelectedTimelineEnum.semua:
+          return const AllTimelineWidget();
+        case SelectedTimelineEnum.harian:
+          return const SingleTimeline();
+        default:
+          return const AllTimelineWidget();
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Timeline"),
         centerTitle: true,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        actions: [
+          PopupMenuButton<SelectedTimelineEnum>(
+            onSelected: (SelectedTimelineEnum timeline) {
+              Provider.of<SelectedTimelineProvider>(context, listen: false)
+                  .setSelectedTimeline(timeline);
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: SelectedTimelineEnum.semua,
+                child: Text("Semua"),
+              ),
+              const PopupMenuItem(
+                value: SelectedTimelineEnum.harian,
+                child: Text("Harian"),
+              )
+            ],
+          )
+        ],
       ),
-      body: const SingleTimeline(),
-      // body: const AllTimelineWidget(),
+      body: getSelectedWidget(
+          context.watch<SelectedTimelineProvider>().selectedTimeline),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
