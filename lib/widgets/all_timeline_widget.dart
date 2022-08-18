@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:jadwalku/widgets/single_timeline.dart';
 
 import '../models/task_model.dart';
 import '../models/timeline_model.dart';
