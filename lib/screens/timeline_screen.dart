@@ -1,12 +1,12 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:jadwalku/models/task_model.dart';
-import 'package:jadwalku/providers/timeline_provider.dart';
-import 'package:jadwalku/widgets/all_timeline_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../models/task_model.dart';
 import '../widgets/single_timeline.dart';
+import '../providers/timeline_provider.dart';
+import '../widgets/cupertino_theme_widget.dart';
 // import '../widgets/all_timeline_widget.dart';
 import '../widgets/text_form_field_widget.dart';
 
@@ -18,8 +18,11 @@ class TimelineScreen extends StatelessWidget {
     TextEditingController taskNameController = TextEditingController();
     TextEditingController taskDescriptionController = TextEditingController();
 
-    DateTime startTime = DateTime.now();
-    DateTime endTime = DateTime.now();
+    // DateTime startTime = DateTime.now();
+    // DateTime endTime = DateTime.now();
+
+    String startTime = "";
+    String endTime = "";
 
     DateFormat dateFormat = DateFormat("HH:MM");
 
@@ -77,41 +80,53 @@ class TimelineScreen extends StatelessWidget {
                                               children: [
                                                 SizedBox(
                                                   height: 200.0,
-                                                  child: CupertinoDatePicker(
+                                                  child: CupertinoThemeWidget(
+                                                    brightness:
+                                                        Theme.of(context)
+                                                            .brightness,
+                                                    childWidget:
+                                                        CupertinoDatePicker(
                                                       initialDateTime:
                                                           DateTime.now(),
                                                       onDateTimeChanged: (val) {
                                                         setState(() {
-                                                          startTime = val;
+                                                          startTime =
+                                                              val.toString();
                                                         });
-                                                      }),
+                                                      },
+                                                    ),
+                                                  ),
                                                 ),
                                                 const SizedBox(
                                                   height: 5.0,
                                                 ),
-                                                CupertinoButton(
+                                                CupertinoThemeWidget(
+                                                  brightness: Theme.of(context)
+                                                      .brightness,
+                                                  childWidget: CupertinoButton(
                                                     child: const Text("OK"),
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
-                                                    })
+                                                    },
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           );
                                         });
                                   },
-                                  style: TextButton.styleFrom(
-                                    primary: Colors.grey.shade400,
-                                    backgroundColor: Colors.grey.shade200,
-                                  ),
-                                  child: Text(
+                                  child: const Text(
                                     "Waktu Mulai",
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                    ),
                                   ),
                                 ),
-                                Text(dateFormat.format(startTime)),
+                                Text(
+                                  startTime.isEmpty
+                                      ? "--:--"
+                                      : dateFormat.format(
+                                          DateTime.parse(startTime),
+                                        ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -130,41 +145,53 @@ class TimelineScreen extends StatelessWidget {
                                               children: [
                                                 SizedBox(
                                                   height: 200.0,
-                                                  child: CupertinoDatePicker(
+                                                  child: CupertinoThemeWidget(
+                                                    brightness:
+                                                        Theme.of(context)
+                                                            .brightness,
+                                                    childWidget:
+                                                        CupertinoDatePicker(
                                                       initialDateTime:
                                                           DateTime.now(),
                                                       onDateTimeChanged: (val) {
                                                         setState(() {
-                                                          endTime = val;
+                                                          endTime =
+                                                              val.toString();
                                                         });
-                                                      }),
+                                                      },
+                                                    ),
+                                                  ),
                                                 ),
                                                 const SizedBox(
                                                   height: 5.0,
                                                 ),
-                                                CupertinoButton(
+                                                CupertinoThemeWidget(
+                                                  brightness: Theme.of(context)
+                                                      .brightness,
+                                                  childWidget: CupertinoButton(
                                                     child: const Text("OK"),
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
-                                                    })
+                                                    },
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           );
                                         });
                                   },
-                                  style: TextButton.styleFrom(
-                                    primary: Colors.grey.shade400,
-                                    backgroundColor: Colors.grey.shade200,
-                                  ),
-                                  child: Text(
+                                  child: const Text(
                                     "Waktu Akhir",
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                    ),
                                   ),
                                 ),
-                                Text(dateFormat.format(endTime)),
+                                Text(
+                                  endTime.isEmpty
+                                      ? "--:--"
+                                      : dateFormat.format(
+                                          DateTime.parse(endTime),
+                                        ),
+                                ),
                               ],
                             )
                           ],
@@ -186,13 +213,18 @@ class TimelineScreen extends StatelessWidget {
                             id: DateTime.now().toString(),
                             title: taskNameController.text,
                             description: taskDescriptionController.text,
-                            startTime: startTime,
-                            endTime: endTime,
+                            startTime: DateTime.parse(startTime),
+                            endTime: DateTime.parse(endTime),
                             isComplete: false,
                           );
 
                           Provider.of<TimelineProvider>(context, listen: false)
                               .addNewTimeline(task);
+
+                          startTime = "";
+                          endTime = "";
+                          taskNameController.clear();
+                          taskDescriptionController.clear();
 
                           Navigator.of(context).pop();
                         },
@@ -205,8 +237,8 @@ class TimelineScreen extends StatelessWidget {
                 });
               });
         },
-        backgroundColor:
-            Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+        // backgroundColor:
+        //     Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
         child: const Icon(
           Icons.add,
         ),

@@ -216,21 +216,21 @@ class AllTimelineWidget extends StatelessWidget {
                       child: FixedTimeline.tileBuilder(
                     theme: TimelineTheme.of(context).copyWith(
                       nodePosition: 0,
-                      connectorTheme:
-                          TimelineTheme.of(context).connectorTheme.copyWith(
-                                thickness: 2.5,
-                                color: Theme.of(context)
-                                    .bottomNavigationBarTheme
-                                    .selectedItemColor,
-                              ),
-                      indicatorTheme:
-                          TimelineTheme.of(context).indicatorTheme.copyWith(
-                                size: 20.0,
-                                position: 0.5,
-                                color: Theme.of(context)
-                                    .bottomNavigationBarTheme
-                                    .selectedItemColor,
-                              ),
+                      // connectorTheme:
+                      //     TimelineTheme.of(context).connectorTheme.copyWith(
+                      //           thickness: 2.5,
+                      //           color: Theme.of(context)
+                      //               .bottomNavigationBarTheme
+                      //               .selectedItemColor,
+                      //         ),
+                      // indicatorTheme:
+                      //     TimelineTheme.of(context).indicatorTheme.copyWith(
+                      //           size: 20.0,
+                      //           position: 0.5,
+                      //           color: Theme.of(context)
+                      //               .bottomNavigationBarTheme
+                      //               .selectedItemColor,
+                      //         ),
                     ),
                     builder: TimelineTileBuilder.connectedFromStyle(
                       contentsAlign: ContentsAlign.basic,

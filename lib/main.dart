@@ -25,17 +25,15 @@ class MyApp extends StatelessWidget {
       title: "Jadwalku",
       home: const MainMenuScreen(),
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF222831),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF222831),
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFF393E46),
-          selectedItemColor: Color(0xFFFFD369),
-          unselectedItemColor: Color(0xFFEEEEEE),
-        ),
-        primaryColor: const Color.fromARGB(255, 253, 198, 69),
+        brightness: Brightness.light,
+        /* light theme settings */
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xFFB83B5E),
+        /* dark theme settings */
+      ),
+      themeMode: ThemeMode.dark,
     );
   }
 }

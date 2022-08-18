@@ -1,20 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:jadwalku/models/task_model.dart';
-import 'package:jadwalku/models/timeline_model.dart';
-import 'package:jadwalku/providers/timeline_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 
-class SingleTimeline extends StatefulWidget {
+import '../models/task_model.dart';
+import '../models/timeline_model.dart';
+import '../providers/timeline_provider.dart';
+
+class SingleTimeline extends StatelessWidget {
   const SingleTimeline({Key? key}) : super(key: key);
-
-  @override
-  State<SingleTimeline> createState() => _SingleTimelineState();
-}
-
-class _SingleTimelineState extends State<SingleTimeline> {
-  IndicatorStyle indicatorStyle = IndicatorStyle.outlined;
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +34,13 @@ class _SingleTimelineState extends State<SingleTimeline> {
                 connectorTheme:
                     TimelineTheme.of(context).connectorTheme.copyWith(
                           thickness: 2.5,
-                          color: Theme.of(context)
-                              .bottomNavigationBarTheme
-                              .selectedItemColor,
+                          color: Theme.of(context).primaryColor,
                         ),
                 indicatorTheme:
                     TimelineTheme.of(context).indicatorTheme.copyWith(
                           size: 25.0,
                           position: 0.5,
-                          color: Theme.of(context)
-                              .bottomNavigationBarTheme
-                              .selectedItemColor,
+                          color: Theme.of(context).primaryColor,
                         ),
               ),
               builder: TimelineTileBuilder.fromStyle(
@@ -64,12 +54,20 @@ class _SingleTimelineState extends State<SingleTimeline> {
                     child: ListTile(
                       title: Text(
                         task.title,
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .bottomNavigationBarTheme
-                              .unselectedItemColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: task.isComplete
+                            ? TextStyle(
+                                letterSpacing: 1.5,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.lineThrough,
+                                decorationThickness: 1.0,
+                                decorationColor: Theme.of(context).primaryColor,
+                              )
+                            : const TextStyle(
+                                letterSpacing: 1.5,
+                                fontWeight: FontWeight.bold,
+                              ),
                       ),
                       subtitle: Padding(
                         padding: const EdgeInsets.only(top: 5.0),
@@ -81,57 +79,40 @@ class _SingleTimelineState extends State<SingleTimeline> {
                               task.description,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .bottomNavigationBarTheme
-                                    .unselectedItemColor,
-                              ),
+                            ),
+                            const SizedBox(
+                              height: 3.0,
                             ),
                             Text(
                               "${dateFormatTask.format(task.startTime)} - ${dateFormatTask.format(task.endTime)}",
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .bottomNavigationBarTheme
-                                    .unselectedItemColor,
-                              ),
+                            ),
+                            const SizedBox(
+                              height: 3.0,
                             ),
                           ],
                         ),
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          setState(() {
-                            if (!task.isComplete) {
-                              indicatorStyle = IndicatorStyle.dot;
-                            } else {
-                              indicatorStyle = IndicatorStyle.outlined;
-                            }
-                          });
-
                           Provider.of<TimelineProvider>(context, listen: false)
                               .toggleCompleteTask(currentTimeline.id, task);
                         },
                         icon: !task.isComplete
-                            ? Icon(
+                            ? const Icon(
                                 Icons.toggle_off,
-                                size: 26.0,
-                                color: Theme.of(context)
-                                    .bottomNavigationBarTheme
-                                    .unselectedItemColor,
+                                size: 35.0,
                               )
                             : Icon(
                                 Icons.toggle_on,
-                                size: 26.0,
-                                color: Theme.of(context)
-                                    .bottomNavigationBarTheme
-                                    .selectedItemColor,
+                                size: 35.0,
+                                color: Theme.of(context).primaryColor,
                               ),
                       ),
                     ),
                   );
                 },
                 itemCount: currentTimeline.timelines.length,
-                indicatorStyle: indicatorStyle,
+                indicatorStyle: IndicatorStyle.dot,
               ),
             ),
           );
