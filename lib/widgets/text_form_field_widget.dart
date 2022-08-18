@@ -23,15 +23,6 @@ class TextFormFieldWidget extends StatelessWidget {
         labelText: label,
         filled: true,
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        // focusColor: Colors.grey.shade200,
-        // fillColor: Colors.grey.shade200,
-        // hoverColor: Colors.grey.shade200,
-        // labelStyle: TextStyle(
-        //   color: Colors.grey.shade600,
-        // ),
-        // hintStyle: TextStyle(
-        //   color: Colors.grey.shade600,
-        // ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5.0),
           borderSide: BorderSide.none,

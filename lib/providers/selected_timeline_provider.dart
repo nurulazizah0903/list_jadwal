@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jadwalku/enum/selected_timeline_enum.dart';
+
+import '../enum/selected_timeline_enum.dart';
 
 class SelectedTimelineProvider with ChangeNotifier {
   SelectedTimelineEnum _selectedTimeline = SelectedTimelineEnum.semua;

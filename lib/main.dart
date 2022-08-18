@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jadwalku/providers/selected_timeline_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/main_menu_screen.dart';
 import '../providers/timeline_provider.dart';
+import '../providers/selected_timeline_provider.dart';
 
 void main() {
   runApp(MultiProvider(

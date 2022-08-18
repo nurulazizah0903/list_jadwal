@@ -1,4 +1,4 @@
-import 'package:jadwalku/models/task_model.dart';
+import '../models/task_model.dart';
 
 class TimelineModel {
   final String id;

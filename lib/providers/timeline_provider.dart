@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 import '../models/task_model.dart';
 import '../models/timeline_model.dart';
