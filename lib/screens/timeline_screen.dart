@@ -23,7 +23,7 @@ class TimelineScreen extends StatelessWidget {
     String startTime = "";
     String endTime = "";
 
-    DateFormat dateFormat = DateFormat("HH:MM");
+    DateFormat dateFormat = DateFormat("HH:mm");
 
     Widget getSelectedWidget(SelectedTimelineEnum timeline) {
       switch (timeline) {

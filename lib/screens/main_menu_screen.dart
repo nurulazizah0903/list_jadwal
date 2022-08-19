@@ -30,8 +30,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: _screens[_selectedNavbar],
       bottomNavigationBar: BottomNavigationBar(
-        // backgroundColor:
-        //     Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.timeline),
@@ -43,10 +41,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           ),
         ],
         currentIndex: _selectedNavbar,
-        // selectedItemColor:
-        //     Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-        // unselectedItemColor:
-        //     Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         showUnselectedLabels: true,
         onTap: _changeSelectedNavBar,
       ),

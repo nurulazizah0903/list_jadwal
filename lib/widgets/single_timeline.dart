@@ -22,7 +22,7 @@ class SingleTimeline extends StatelessWidget {
         DateFormat dateFormat = DateFormat("yyyy-MM-dd");
         String dateTime = dateFormat.format(DateTime.now());
 
-        DateFormat dateFormatTask = DateFormat("HH:MM");
+        DateFormat dateFormatTask = DateFormat("HH:mm");
 
         if (value.isTimelineExist(dateTime)) {
           TimelineModel currentTimeline = value.getTimelineById(dateTime);
@@ -58,14 +58,14 @@ class SingleTimeline extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: task.isComplete
                             ? TextStyle(
-                                letterSpacing: 1.5,
+                                letterSpacing: 1.0,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.lineThrough,
-                                decorationThickness: 1.0,
+                                decorationThickness: 4.0,
                                 decorationColor: Theme.of(context).primaryColor,
                               )
                             : const TextStyle(
-                                letterSpacing: 1.5,
+                                letterSpacing: 1.0,
                                 fontWeight: FontWeight.bold,
                               ),
                       ),
