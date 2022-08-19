@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 
 import '../models/task_model.dart';
+import '../services/hive_service.dart';
 import '../models/timeline_model.dart';
-import '../providers/timeline_provider.dart';
 
 class SingleTimeline extends StatelessWidget {
   const SingleTimeline({Key? key}) : super(key: key);
@@ -17,8 +17,8 @@ class SingleTimeline extends StatelessWidget {
         vertical: 0.0,
         horizontal: 20.0,
       ),
-      child: Consumer<TimelineProvider>(
-          builder: (BuildContext context, value, child) {
+      child:
+          Consumer<HiveService>(builder: (BuildContext context, value, child) {
         DateFormat dateFormat = DateFormat("yyyy-MM-dd");
         String dateTime = dateFormat.format(DateTime.now());
 
@@ -86,15 +86,12 @@ class SingleTimeline extends StatelessWidget {
                             Text(
                               "${dateFormatTask.format(task.startTime)} - ${dateFormatTask.format(task.endTime)}",
                             ),
-                            const SizedBox(
-                              height: 3.0,
-                            ),
                           ],
                         ),
                       ),
                       trailing: IconButton(
-                        onPressed: () {
-                          Provider.of<TimelineProvider>(context, listen: false)
+                        onPressed: () async {
+                          await Provider.of<HiveService>(context, listen: false)
                               .toggleCompleteTask(currentTimeline.id, task);
                         },
                         icon: !task.isComplete

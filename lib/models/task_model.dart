@@ -1,8 +1,22 @@
+import 'package:hive/hive.dart';
+
+part "task_model.g.dart";
+
+@HiveType(typeId: 0)
 class TaskModel {
+  @HiveField(0)
   String id;
+
+  @HiveField(1)
   final String title;
+
+  @HiveField(2)
   final String description;
+
+  @HiveField(3)
   final DateTime startTime;
+
+  @HiveField(4)
   final DateTime endTime;
   bool isComplete = false;
 

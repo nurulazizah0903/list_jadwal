@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 
 import '../models/task_model.dart';
-import '../providers/timeline_provider.dart';
+import '../services/hive_service.dart';
 
 class AllTimelineWidget extends StatelessWidget {
   const AllTimelineWidget({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class AllTimelineWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Consumer<TimelineProvider>(builder: ((context, value, child) {
+      child: Consumer<HiveService>(builder: ((context, value, child) {
         if (value.timelines.isNotEmpty) {
           return ListView(
             children: value.timelines.entries.map((item) {

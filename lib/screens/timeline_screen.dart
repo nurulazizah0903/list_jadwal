@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import '../models/task_model.dart';
+import '../services/hive_service.dart';
 import '../widgets/single_timeline.dart';
 import '../enum/selected_timeline_enum.dart';
-import '../providers/timeline_provider.dart';
 import '../widgets/all_timeline_widget.dart';
 import '../widgets/cupertino_theme_widget.dart';
 import '../widgets/text_form_field_widget.dart';
@@ -245,7 +245,10 @@ class TimelineScreen extends StatelessWidget {
                             isComplete: false,
                           );
 
-                          Provider.of<TimelineProvider>(context, listen: false)
+                          // Provider.of<TimelineProvider>(context, listen: false)
+                          //     .addNewTimeline(task);
+
+                          Provider.of<HiveService>(context, listen: false)
                               .addNewTimeline(task);
 
                           startTime = "";
@@ -264,8 +267,6 @@ class TimelineScreen extends StatelessWidget {
                 });
               });
         },
-        // backgroundColor:
-        //     Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
         child: const Icon(
           Icons.add,
         ),
