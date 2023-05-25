@@ -21,7 +21,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
 
   final List<Widget> _screens = const [
     TimelineScreen(),
-    UnplanedScreen(),
   ];
 
   @override
@@ -34,10 +33,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.timeline),
             label: "Timeline",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.question_mark_rounded),
-            label: "Unplaned",
           ),
         ],
         currentIndex: _selectedNavbar,

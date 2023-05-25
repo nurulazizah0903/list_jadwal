@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Jadwalku",
+      title: "List My Schedule",
       home: const MainMenuScreen(),
       theme: ThemeData(
         brightness: Brightness.light,
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: const Color(0xFFB83B5E),
+        primaryColor: Color.fromARGB(255, 239, 7, 3),
         // primaryColor: Colors.amber,
         /* dark theme settings */
       ),
